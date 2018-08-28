@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>{{cliente.nome}}</h1>
+    {% if error_message %}
+    <p>
+        <strong>{{error_message}}</strong>
+    </p>
+    {% endif %}
+
+    <form action="{% url 'reservas:confirma' cliente.id %}" method="post">
+        {% csrf_token %} {% for reserva in cliente.reservas_nao_confirmadas %}
+        <input type="checkbox" name="confirmacao" id="confirmacao{{forloop.counter}}" value="{{reserva.id}} {% if reserva_confirmada %} checked {% endif %}">
+        <label for="confirmacao{{forloop.counter}}">Confirmar? - {{reserva.data_evento}} - {{reserva.pessoas}}</label>
+        <br/> {% endfor %}
+        <input type="submit" value="Atualizar">
+    </form>
+
+</body>
+
+</html>
