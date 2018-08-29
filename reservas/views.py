@@ -6,7 +6,20 @@ from django.urls import reverse
 from .models import Cliente
 
 def index(request):
-    ultimos_clientes = Cliente.objects.order_by('-registrado_em')
+    ordem = request.GET.get('ordem', 'registrado_em')
+    direcao = request.GET.get('direcao', 'desc')
+    campos = (field.name for field in Cliente._meta.fields)
+
+    if ordem not in campos:
+        ordem = 'registrado_em'
+
+    if direcao == 'desc':
+        direcao = '-'
+    else:
+        direcao = ''
+    ordenacao = f'{direcao}{ordem}' #-nome ou nome
+
+    ultimos_clientes = Cliente.objects.order_by(ordenacao)
     return render(request, 'index.html', {'ultimos_clientes': ultimos_clientes})
 
 def detalhe(request, cliente_id):
