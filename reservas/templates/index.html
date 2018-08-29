@@ -13,7 +13,7 @@
     <ul>
         {% for cliente in ultimos_clientes%}
         <li>
-            <a href="{% url 'reservas:detalhe' cliente.id %}">{{cliente.nome}}</a>
+            <a href="{% url 'reservas:reservas' cliente.id %}">{{cliente.nome}}</a>
         </li>
         {% endfor %}
     </ul>
