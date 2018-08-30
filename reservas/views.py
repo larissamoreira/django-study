@@ -1,26 +1,30 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-
+from django.views.generic import ListView
 
 from .models import Cliente
 
-def index(request):
-    ordem = request.GET.get('ordem', 'registrado_em')
-    direcao = request.GET.get('direcao', 'desc')
-    campos = (field.name for field in Cliente._meta.fields)
+# def index(request):
+#     ordem = request.GET.get('ordem', 'registrado_em')
+#     direcao = request.GET.get('direcao', 'desc')
+#     campos = (field.name for field in Cliente._meta.fields)
 
-    if ordem not in campos:
-        ordem = 'registrado_em'
+#     if ordem not in campos:
+#         ordem = 'registrado_em'
 
-    if direcao == 'desc':
-        direcao = '-'
-    else:
-        direcao = ''
-    ordenacao = f'{direcao}{ordem}' #-nome ou nome
+#     if direcao == 'desc':
+#         direcao = '-'
+#     else:
+#         direcao = ''
+#     ordenacao = f'{direcao}{ordem}' #-nome ou nome
 
-    ultimos_clientes = Cliente.objects.order_by(ordenacao)
-    return render(request, 'index.html', {'ultimos_clientes': ultimos_clientes})
+#     ultimos_clientes = Cliente.objects.order_by(ordenacao)
+#     return render(request, 'index.html', {'ultimos_clientes': ultimos_clientes})
+
+class IndexView(ListView):
+    model = Cliente
+    template_name='index.html'
 
 def detalhe(request, cliente_id):
     cliente = get_object_or_404(Cliente, pk=cliente_id)

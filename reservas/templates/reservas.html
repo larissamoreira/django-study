@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-
-<body>
-    <h1>{{cliente.nome}}</h1>
-    <ul>
-        {% for reserva in cliente.reservas_confirmadas %}
-        <li>Data reserva: {{reserva.data_reserva}} -- Data evento: {{reserva.data_evento}} -- Qtde de pessoas: {{reserva.pessoas}}</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'reservas:detalhe' cliente.id %}">Confirmar mais reservas?</a>
-</body>
-
-</html>
+{% extends "base.html" %} {% block conteudo %}
+<h1>{{cliente.nome}}</h1>
+<ul>
+    {% for reserva in cliente.reservas_confirmadas %}
+    <li>Data reserva: {{reserva.data_reserva}} -- Data evento: {{reserva.data_evento}} -- Qtde de pessoas: {{reserva.pessoas}}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'reservas:detalhe' cliente.id %}">Confirmar mais reservas?</a>
+{% endblock conteudo %}
