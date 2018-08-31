@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% block conteudo %}
+{% extends "base.html" %} 
+{% block conteudo %}
+
 <h1>{{cliente.nome}}</h1>
 <ul>
     {% for reserva in cliente.reservas_confirmadas %}
@@ -6,4 +8,5 @@
     {% endfor %}
 </ul>
 <a href="{% url 'reservas:detalhe' cliente.id %}">Confirmar mais reservas?</a>
+
 {% endblock conteudo %}
