@@ -10,6 +10,15 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/style.css' %}" />
     <script src="main.js"></script>
 </head>
+<header>
+    {% if user.is_authenticated %}
+        <p>Hi, {{user.username}}</p>
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <p>Vc n esta logado!</p>
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</header>
 <body>
     {% block content %}
     {% endblock %}
