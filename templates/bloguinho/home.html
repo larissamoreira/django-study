@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<a href="{% url 'post_create' %}">Novo postin</a>
 <h1>Postinhos</h1>
 {% for post in object_list %}
 <div>{{post.body}}</div>
-    
+<a href="{% url 'post_detail' post.id %}">Ver</a>
+<a href="{% url 'post_edit' post.id %}">Editar</a>
+<a href="{% url 'post_delete' post.id %}">Deletar</a>
 {% endfor %}
 
 {% endblock content %}

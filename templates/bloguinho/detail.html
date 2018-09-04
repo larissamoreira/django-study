@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="{% url 'home' %}">Ver todos</a>
+
+<h1>Postinho</h1>
+
+<div>{{post.body}}</div>
+    
+{% endblock content %}

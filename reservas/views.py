@@ -21,6 +21,7 @@ def index(request):
 
     ultimos_clientes = Cliente.objects.order_by(ordenacao)
     return render(request, 'reservas/index.html', {'ultimos_clientes': ultimos_clientes})
+
 """
 class IndexView(ListView):
     model = Cliente
